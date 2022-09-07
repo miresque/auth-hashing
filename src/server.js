@@ -3,6 +3,7 @@ const app = express();
 
 const morgan = require('morgan')
 const cors = require('cors');
+const auth = require('./middleware/auth')
 
 app.disable('x-powered-by');
 
@@ -17,6 +18,6 @@ const usersRouter = require('./routers/users.js');
 
 app.use('/register', registrationsRouter);
 app.use('/login', sessionsRouter);
-app.use('/user', usersRouter);
+app.use('/user', auth, usersRouter);
 
 module.exports = app
